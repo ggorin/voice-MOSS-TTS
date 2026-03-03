@@ -3,27 +3,33 @@ import functools
 import importlib.util
 from pathlib import Path
 import re
+import sys
 import time
 import orjson
 
 import gradio as gr
 import numpy as np
 import torch
+
+# Apply MPS compatibility patches before importing model code
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import mps_compat  # noqa: F401, E402
+
 from transformers import AutoModel, AutoProcessor
 
-# Disable the broken cuDNN SDPA backend
-torch.backends.cuda.enable_cudnn_sdp(False)
-# Keep these enabled as fallbacks
-torch.backends.cuda.enable_flash_sdp(True)
-torch.backends.cuda.enable_mem_efficient_sdp(True)
-torch.backends.cuda.enable_math_sdp(True)
+from optimized_generate import patch_generate
+
+# Disable the broken cuDNN SDPA backend (CUDA only)
+if torch.cuda.is_available():
+    torch.backends.cuda.enable_cudnn_sdp(False)
+    torch.backends.cuda.enable_flash_sdp(True)
+    torch.backends.cuda.enable_mem_efficient_sdp(True)
+    torch.backends.cuda.enable_math_sdp(True)
 
 MODEL_PATH = "OpenMOSS-Team/MOSS-TTS"
 DEFAULT_ATTN_IMPLEMENTATION = "auto"
 DEFAULT_MAX_NEW_TOKENS = 4096
-CONTINUATION_NOTICE = (
-    "Continuation mode is active. Make sure the reference audio transcript is prepended to the input text."
-)
+CONTINUATION_NOTICE = "Continuation mode is active. Make sure the reference audio transcript is prepended to the input text."
 
 MODE_CLONE = "Clone"
 MODE_CONTINUE = "Continuation"
@@ -31,7 +37,12 @@ MODE_CONTINUE_CLONE = "Continuation + Clone"
 ZH_TOKENS_PER_CHAR = 3.098411951313033
 EN_TOKENS_PER_CHAR = 0.8673376262755219
 REFERENCE_AUDIO_DIR = Path(__file__).resolve().parent.parent / "assets" / "audio"
-EXAMPLE_TEXTS_JSONL_PATH = Path(__file__).resolve().parent.parent / "assets" / "text" / "moss_tts_example_texts.jsonl"
+EXAMPLE_TEXTS_JSONL_PATH = (
+    Path(__file__).resolve().parent.parent
+    / "assets"
+    / "text"
+    / "moss_tts_example_texts.jsonl"
+)
 
 
 def _parse_example_id(example_id: str) -> tuple[str, int] | None:
@@ -69,7 +80,7 @@ def build_example_rows() -> list[tuple[str, str, str]]:
             if audio_path is None:
                 continue
 
-            rows.append((sample['role'], str(audio_path), text))
+            rows.append((sample["role"], str(audio_path), text))
 
     return rows
 
@@ -79,8 +90,13 @@ EXAMPLE_ROWS = build_example_rows()
 
 @functools.lru_cache(maxsize=1)
 def load_backend(model_path: str, device_str: str, attn_implementation: str):
-    device = torch.device(device_str if torch.cuda.is_available() else "cpu")
-    dtype = torch.bfloat16 if device.type == "cuda" else torch.float32
+    if torch.cuda.is_available():
+        device = torch.device(device_str)
+    elif torch.backends.mps.is_available():
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
+    dtype = torch.bfloat16 if device.type in ("cuda", "mps") else torch.float32
     resolved_attn_implementation = resolve_attn_implementation(
         requested=attn_implementation,
         device=device,
@@ -103,12 +119,15 @@ def load_backend(model_path: str, device_str: str, attn_implementation: str):
 
     model = AutoModel.from_pretrained(model_path, **model_kwargs).to(device)
     model.eval()
+    patch_generate(model)
 
     sample_rate = int(getattr(processor.model_config, "sampling_rate", 24000))
     return model, processor, device, sample_rate
 
 
-def resolve_attn_implementation(requested: str, device: torch.device, dtype: torch.dtype) -> str | None:
+def resolve_attn_implementation(
+    requested: str, device: torch.device, dtype: torch.dtype
+) -> str | None:
     requested_norm = (requested or "").strip().lower()
 
     if requested_norm in {"none"}:
@@ -127,8 +146,8 @@ def resolve_attn_implementation(requested: str, device: torch.device, dtype: tor
         if major >= 8:
             return "flash_attention_2"
 
-    # CUDA fallback: use PyTorch SDPA kernels.
-    if device.type == "cuda":
+    # CUDA / MPS: use PyTorch SDPA kernels.
+    if device.type in ("cuda", "mps"):
         return "sdpa"
 
     # CPU fallback.
@@ -173,7 +192,11 @@ def update_duration_controls(
 
     checkbox_update = gr.update(interactive=True)
     if not enabled:
-        return gr.update(visible=False), "Duration control is disabled.", checkbox_update
+        return (
+            gr.update(visible=False),
+            "Duration control is disabled.",
+            checkbox_update,
+        )
 
     language, default_tokens, min_tokens, max_tokens = estimate_duration_tokens(text)
     # Slider is initialized with value=1 as a placeholder; treat it as "unset"
@@ -262,7 +285,14 @@ def apply_example_selection(
     evt: gr.SelectData,
 ):
     if evt is None or evt.index is None:
-        return gr.update(), gr.update(), gr.update(), gr.update(), gr.update(), gr.update()
+        return (
+            gr.update(),
+            gr.update(),
+            gr.update(),
+            gr.update(),
+            gr.update(),
+            gr.update(),
+        )
 
     if isinstance(evt.index, (tuple, list)):
         row_idx = int(evt.index[0])
@@ -270,14 +300,23 @@ def apply_example_selection(
         row_idx = int(evt.index)
 
     if row_idx < 0 or row_idx >= len(EXAMPLE_ROWS):
-        return gr.update(), gr.update(), gr.update(), gr.update(), gr.update(), gr.update()
+        return (
+            gr.update(),
+            gr.update(),
+            gr.update(),
+            gr.update(),
+            gr.update(),
+            gr.update(),
+        )
 
     _, audio_path, example_text = EXAMPLE_ROWS[row_idx]
-    duration_slider_update, duration_hint, duration_checkbox_update = update_duration_controls(
-        duration_control_enabled,
-        example_text,
-        duration_tokens,
-        mode_with_reference,
+    duration_slider_update, duration_hint, duration_checkbox_update = (
+        update_duration_controls(
+            duration_control_enabled,
+            example_text,
+            duration_tokens,
+            mode_with_reference,
+        )
     )
     return (
         audio_path,
@@ -310,7 +349,9 @@ def run_inference(
         device_str=device,
         attn_implementation=attn_implementation,
     )
-    duration_enabled = bool(duration_control_enabled and supports_duration_control(mode_with_reference))
+    duration_enabled = bool(
+        duration_control_enabled and supports_duration_control(mode_with_reference)
+    )
     expected_tokens = int(duration_tokens) if duration_enabled else None
     conversations, mode, mode_name = build_conversation(
         text=text,
@@ -487,10 +528,14 @@ def build_demo(args: argparse.Namespace):
                         label="max_new_tokens",
                     )
 
-                run_btn = gr.Button("Generate Speech", variant="primary", elem_id="run-btn")
+                run_btn = gr.Button(
+                    "Generate Speech", variant="primary", elem_id="run-btn"
+                )
 
             with gr.Column(scale=2):
-                output_audio = gr.Audio(label="Output Audio", type="numpy", elem_id="output_audio")
+                output_audio = gr.Audio(
+                    label="Output Audio", type="numpy", elem_id="output_audio"
+                )
                 status = gr.Textbox(label="Status", lines=4, interactive=False)
                 examples_table = gr.Dataframe(
                     headers=["Reference Speech", "Example Text"],
@@ -515,17 +560,32 @@ def build_demo(args: argparse.Namespace):
         )
         duration_control_enabled.change(
             fn=update_duration_controls,
-            inputs=[duration_control_enabled, text, duration_tokens, mode_with_reference],
+            inputs=[
+                duration_control_enabled,
+                text,
+                duration_tokens,
+                mode_with_reference,
+            ],
             outputs=[duration_tokens, duration_hint, duration_control_enabled],
         )
         text.change(
             fn=update_duration_controls,
-            inputs=[duration_control_enabled, text, duration_tokens, mode_with_reference],
+            inputs=[
+                duration_control_enabled,
+                text,
+                duration_tokens,
+                mode_with_reference,
+            ],
             outputs=[duration_tokens, duration_hint, duration_control_enabled],
         )
         mode_with_reference.change(
             fn=update_duration_controls,
-            inputs=[duration_control_enabled, text, duration_tokens, mode_with_reference],
+            inputs=[
+                duration_control_enabled,
+                text,
+                duration_tokens,
+                mode_with_reference,
+            ],
             outputs=[duration_tokens, duration_hint, duration_control_enabled],
         )
         examples_table.select(
@@ -542,20 +602,22 @@ def build_demo(args: argparse.Namespace):
         )
 
         run_btn.click(
-            fn=lambda text, reference_audio, mode_with_reference, duration_control_enabled, duration_tokens, temperature, top_p, top_k, repetition_penalty, max_new_tokens: run_inference(
-                text=text,
-                reference_audio=reference_audio,
-                mode_with_reference=mode_with_reference,
-                duration_control_enabled=duration_control_enabled,
-                duration_tokens=duration_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                top_k=top_k,
-                repetition_penalty=repetition_penalty,
-                model_path=args.model_path,
-                device=args.device,
-                attn_implementation=args.attn_implementation,
-                max_new_tokens=max_new_tokens,
+            fn=lambda text, reference_audio, mode_with_reference, duration_control_enabled, duration_tokens, temperature, top_p, top_k, repetition_penalty, max_new_tokens: (
+                run_inference(
+                    text=text,
+                    reference_audio=reference_audio,
+                    mode_with_reference=mode_with_reference,
+                    duration_control_enabled=duration_control_enabled,
+                    duration_tokens=duration_tokens,
+                    temperature=temperature,
+                    top_p=top_p,
+                    top_k=top_k,
+                    repetition_penalty=repetition_penalty,
+                    model_path=args.model_path,
+                    device=args.device,
+                    attn_implementation=args.attn_implementation,
+                    max_new_tokens=max_new_tokens,
+                )
             ),
             inputs=[
                 text,
@@ -577,20 +639,40 @@ def build_demo(args: argparse.Namespace):
 def main():
     parser = argparse.ArgumentParser(description="MossTTS Gradio Demo")
     parser.add_argument("--model_path", type=str, default=MODEL_PATH)
-    parser.add_argument("--device", type=str, default="cuda:0")
-    parser.add_argument("--attn_implementation", type=str, default=DEFAULT_ATTN_IMPLEMENTATION)
+    parser.add_argument(
+        "--device",
+        type=str,
+        default="cuda:0"
+        if torch.cuda.is_available()
+        else "mps"
+        if torch.backends.mps.is_available()
+        else "cpu",
+    )
+    parser.add_argument(
+        "--attn_implementation", type=str, default=DEFAULT_ATTN_IMPLEMENTATION
+    )
     parser.add_argument("--host", type=str, default="0.0.0.0")
     parser.add_argument("--port", type=int, default=7860)
     parser.add_argument("--share", action="store_true")
     args = parser.parse_args()
 
-    runtime_device = torch.device(args.device if torch.cuda.is_available() else "cpu")
-    runtime_dtype = torch.bfloat16 if runtime_device.type == "cuda" else torch.float32
-    args.attn_implementation = resolve_attn_implementation(
-        requested=args.attn_implementation,
-        device=runtime_device,
-        dtype=runtime_dtype,
-    ) or "none"
+    if torch.cuda.is_available():
+        runtime_device = torch.device(args.device)
+    elif torch.backends.mps.is_available():
+        runtime_device = torch.device("mps")
+    else:
+        runtime_device = torch.device("cpu")
+    runtime_dtype = (
+        torch.bfloat16 if runtime_device.type in ("cuda", "mps") else torch.float32
+    )
+    args.attn_implementation = (
+        resolve_attn_implementation(
+            requested=args.attn_implementation,
+            device=runtime_device,
+            dtype=runtime_dtype,
+        )
+        or "none"
+    )
     print(f"[INFO] Using attn_implementation={args.attn_implementation}", flush=True)
 
     # Preload model/processor at startup to avoid first-request cold start latency.
