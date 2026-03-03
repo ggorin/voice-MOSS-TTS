@@ -36,56 +36,53 @@ NARRATION_SEGMENTS = [
     # Slide 1: Hook
     (
         "slide1_hook",
-        "You have more reviews than your top competitor. "
-        "Three hundred and six reviews at four point seven stars. "
-        "One more review than Fishkill Cannabis. "
-        "So why are they outranking you? "
-        "They hold the number one spot because their website has what yours is missing: "
-        "meta descriptions, schema markup, and proper on-page S.E.O. "
-        "Three hundred and six reviews. Forty two out of one hundred website score. "
-        "The fix is faster than you think.",
+        "So here's what's interesting. You've got three hundred and six reviews "
+        "at four point seven stars. That's one more review than Fishkill Cannabis. "
+        "But they're still outranking you. And the reason is, their website has "
+        "what yours is missing. Meta descriptions, schema markup, on-page S.E.O. "
+        "You've got the reviews, you've got the reputation. Your website score's "
+        "sitting at forty two out of a hundred. The good news? The fix is way "
+        "faster than you'd think.",
     ),
     # Slide 2: Audit findings
     (
         "slide2_audit",
-        "Your reputation is strong. Your website isn't keeping up. "
-        "Your Google Business Profile scores ninety out of one hundred, "
-        "and you're already ranking number one for dispensary Fishkill. "
-        "But here's what's costing you customers. "
-        "Zero meta descriptions across all fifteen indexed pages. "
-        "Your homepage is missing an H1 tag, so Google can't identify your main heading. "
-        "No schema markup. Your competitors have it, you don't. "
-        "Eleven broken links are damaging user experience. "
-        "And your homepage has only two hundred forty nine words. "
-        "Google considers that thin content.",
+        "So your reputation's great. Like, your Google Business Profile scores "
+        "ninety out of a hundred, and you're already number one for dispensary "
+        "Fishkill. That's solid. But here's what's costing you. "
+        "You've got zero meta descriptions across all fifteen pages. "
+        "Your homepage doesn't have an H1 tag, so Google can't even tell what "
+        "your main heading is. No schema markup, and your competitors have it. "
+        "There are eleven broken links hurting user experience. And then your "
+        "homepage only has two hundred forty nine words, which Google sees as "
+        "thin content. So there's a lot of low-hanging fruit here.",
     ),
     # Slide 3: 90-day plan
     (
         "slide3_plan",
-        "Here's your ninety day plan. Sixteen moves to own the number one spot in Fishkill. "
-        "We project your score will rise from forty two to between eighty and ninety. "
-        "Phase one: stop the bleeding. This week, add meta descriptions to all fifteen pages, "
-        "add H1 headings, implement schema markup, and fix those eleven broken links. "
-        "Phase two: build the foundation. Fix your N.A.P. inconsistencies, "
-        "create a Leafly profile, and build a location landing page. "
-        "Phase three: dominate the market. Expand your content, create regional landing pages "
-        "for Beacon, Wappingers, and Newburgh, and launch a monthly blog.",
+        "Alright, so here's the ninety day plan. Sixteen moves to get you that "
+        "number one spot. And we're projecting your score goes from forty two "
+        "up to between eighty and ninety. Phase one is stop the bleeding. "
+        "This week we add meta descriptions to all fifteen pages, get H1 "
+        "headings in, implement schema markup, and fix those eleven broken links. "
+        "Phase two, we build the foundation. We fix your N.A.P. inconsistencies, "
+        "get you a Leafly profile, and build out a location landing page. "
+        "And then phase three is where we really dominate. We expand your content, "
+        "create landing pages for Beacon, Wappingers, Newburgh, and launch a "
+        "monthly blog.",
     ),
     # Slide 4: CTA
     (
         "slide4_cta",
-        "Let's put Farmers Choice in the number one spot. "
-        "Step one: just reply to this email and say I'm interested. "
-        "No commitment, no pressure. "
-        "Step two: we'll do a fifteen minute strategy call "
-        "and walk through the top five quick wins. "
-        "Step three: we build, you grow. "
-        "We handle the technical work. You keep doing what you're great at: "
-        "running Fishkill's best dispensary. "
-        "Before our call, we'll deliver three free quick wins, "
-        "including a custom Google Business Profile description, "
-        "meta description copy for your top pages, "
-        "and a list of every N.A.P. mismatch with exact corrections.",
+        "So let's get Farmers Choice into that number one spot. All you gotta "
+        "do is reply to this email, say hey I'm interested. No commitment, no "
+        "pressure at all. Then we'll hop on a quick fifteen minute call and walk "
+        "through the top five quick wins together. From there, we build, you grow. "
+        "We handle all the technical stuff, you keep doing what you're great at, "
+        "which is running Fishkill's best dispensary. And actually, before we even "
+        "get on that call, we're gonna deliver three free quick wins. A custom "
+        "Google Business Profile description, meta description copy for your top "
+        "pages, and a full list of every N.A.P. mismatch with the exact corrections.",
     ),
 ]
 
@@ -105,29 +102,20 @@ CONSULTANT_INSTRUCTION = (
 # Per-slide emotion instructions for Adam Barrow voice clone
 ADAM_BARROW_EMOTIONS = {
     "slide1_hook": (
-        "Confident and intriguing sales pitch with expressive delivery. "
-        "Vary intonation between sentences — pause clearly at each period. "
-        "Start with genuine curiosity, build suspense revealing the competitor gap. "
-        "Slight disbelief on the question, then shift to authoritative and reassuring. "
-        "Energetic but controlled pacing with natural breath pauses between thoughts."
+        "Natural, conversational tone like you're walking a client through findings "
+        "in a relaxed meeting. Casual but confident. Think out loud, not reading."
     ),
     "slide2_audit": (
-        "Warm but direct and expressive delivery with clear pauses between sentences. "
-        "Acknowledge strengths with pride, then shift to concerned and urgent listing problems. "
-        "Emphasize each issue with gravity, like a doctor delivering a diagnosis carefully. "
-        "Measured pacing on the numbers, let each finding land with a pause after."
+        "Friendly and direct, like explaining results to a client you already know. "
+        "Matter-of-fact on the issues but not alarming. Casual, natural pacing."
     ),
     "slide3_plan": (
-        "Optimistic and action-oriented with dynamic intonation and clear sentence breaks. "
-        "Build excitement and momentum through the roadmap. Confident and reassuring tone. "
-        "Slightly faster pace conveying energy. Emphasize phase transitions with pauses. "
-        "Coach-like motivational delivery with rising energy across the plan."
+        "Upbeat and energetic like you're genuinely excited to share the game plan. "
+        "Conversational momentum, like you're talking someone through it live."
     ),
     "slide4_cta": (
-        "Warm, personal, and encouraging with natural conversational pauses. "
-        "Low-pressure friendly tone, like talking to a friend over coffee. "
-        "Genuine enthusiasm about the free deliverables. Clear sentence separation. "
-        "End with sincere confidence and a slight smile in the voice."
+        "Warm and easy-going, zero pressure. Like chatting with a friend about next steps. "
+        "Genuine and relaxed, with a little excitement about the free deliverables."
     ),
 }
 
