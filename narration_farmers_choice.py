@@ -36,53 +36,61 @@ NARRATION_SEGMENTS = [
     # Slide 1: Hook
     (
         "slide1_hook",
-        "So here's what's interesting. You've got three hundred and six reviews "
-        "at four point seven stars. That's one more review than Fishkill Cannabis. "
-        "But they're still outranking you. And the reason is, their website has "
-        "what yours is missing. Meta descriptions, schema markup, on-page S.E.O. "
-        "You've got the reviews, you've got the reputation. Your website score's "
-        "sitting at forty two out of a hundred. The good news? The fix is way "
-        "faster than you'd think.",
+        "So here's, here's what's really interesting, right? You've got three "
+        "hundred and six reviews at four point seven stars. You know, that's one "
+        "more review than Fishkill Cannabis. But they're still outranking you, "
+        "and the reason is, you know, their website has what yours is missing. "
+        "Meta descriptions, schema markup, kind of proper on-page S.E.O. "
+        "And you've got the reviews, you've got the reputation, you've got the "
+        "whole thing. Your website score's sitting at like forty two out of a "
+        "hundred, right? But the good news is the fix is, it's way faster than "
+        "you'd think.",
     ),
     # Slide 2: Audit findings
     (
         "slide2_audit",
-        "So your reputation's great. Like, your Google Business Profile scores "
-        "ninety out of a hundred, and you're already number one for dispensary "
-        "Fishkill. That's solid. But here's what's costing you. "
-        "You've got zero meta descriptions across all fifteen pages. "
-        "Your homepage doesn't have an H1 tag, so Google can't even tell what "
-        "your main heading is. No schema markup, and your competitors have it. "
-        "There are eleven broken links hurting user experience. And then your "
-        "homepage only has two hundred forty nine words, which Google sees as "
-        "thin content. So there's a lot of low-hanging fruit here.",
+        "So your reputation's great, right? Like, your Google Business Profile "
+        "scores ninety out of a hundred, and you're already ranking number one "
+        "for dispensary Fishkill. That's, that's solid. But here's what's kind "
+        "of costing you customers. You've got zero meta descriptions across all "
+        "fifteen pages. Your homepage doesn't have an H1 tag, so Google can't "
+        "even tell what your main heading is, right? No schema markup, and your "
+        "competitors, they have it. You know, there's like eleven broken links "
+        "hurting your user experience. And then your homepage only has about two "
+        "hundred fifty words, which Google sees as thin content. So again, "
+        "there's, there's a lot of low-hanging fruit here.",
     ),
     # Slide 3: 90-day plan
     (
         "slide3_plan",
-        "Alright, so here's the ninety day plan. Sixteen moves to get you that "
-        "number one spot. And we're projecting your score goes from forty two "
-        "up to between eighty and ninety. Phase one is stop the bleeding. "
-        "This week we add meta descriptions to all fifteen pages, get H1 "
-        "headings in, implement schema markup, and fix those eleven broken links. "
-        "Phase two, we build the foundation. We fix your N.A.P. inconsistencies, "
-        "get you a Leafly profile, and build out a location landing page. "
-        "And then phase three is where we really dominate. We expand your content, "
-        "create landing pages for Beacon, Wappingers, Newburgh, and launch a "
-        "monthly blog.",
+        "Alright, so here's the ninety day plan. We've got sixteen moves to get "
+        "you that number one spot, right? And we're projecting your score goes "
+        "from like forty two up to, you know, between eighty and ninety. So "
+        "phase one is stop the bleeding. This week we add meta descriptions to "
+        "all fifteen pages, get the H1 headings in, implement schema markup, "
+        "and fix those eleven broken links. Phase two, we, we build the foundation. "
+        "We fix your N.A.P. inconsistencies, get you a Leafly profile, and build "
+        "out a location landing page. And then phase three is where we really "
+        "kind of dominate the market, right? We expand your content, create "
+        "landing pages for Beacon, Wappingers, Newburgh, and launch a monthly "
+        "blog. And, you know, the proof's in the pudding. We're, we're really "
+        "excited about what this is going to do for you guys.",
     ),
     # Slide 4: CTA
     (
         "slide4_cta",
-        "So let's get Farmers Choice into that number one spot. All you gotta "
-        "do is reply to this email, say hey I'm interested. No commitment, no "
-        "pressure at all. Then we'll hop on a quick fifteen minute call and walk "
-        "through the top five quick wins together. From there, we build, you grow. "
-        "We handle all the technical stuff, you keep doing what you're great at, "
-        "which is running Fishkill's best dispensary. And actually, before we even "
-        "get on that call, we're gonna deliver three free quick wins. A custom "
-        "Google Business Profile description, meta description copy for your top "
-        "pages, and a full list of every N.A.P. mismatch with the exact corrections.",
+        "So let's, let's get Farmers Choice into that number one spot, right? "
+        "All you gotta do is reply to this email, say hey, I'm interested. No "
+        "commitment, no pressure at all. We sit on the exact same side of the "
+        "table here. Then we'll hop on a quick fifteen minute call and walk "
+        "through the top five quick wins together. And from there, you know, "
+        "we build, you grow. We handle all the technical stuff, you keep doing "
+        "what you're great at, which is running Fishkill's best dispensary. "
+        "And actually, before we even get on that call, we're gonna deliver "
+        "three quick wins gratis. A custom Google Business Profile description, "
+        "meta description copy for your top pages, and a full list of every "
+        "N.A.P. mismatch with the exact corrections. Again, we only win if you "
+        "win first, right? So let's, let's get you guys turned on.",
     ),
 ]
 
