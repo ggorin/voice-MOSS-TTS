@@ -102,6 +102,35 @@ CONSULTANT_INSTRUCTION = (
     "Steady rhythm with slight emphasis on key numbers and action items."
 )
 
+# Per-slide emotion instructions for Adam Barrow voice clone
+ADAM_BARROW_EMOTIONS = {
+    "slide1_hook": (
+        "Confident and intriguing sales pitch with expressive delivery. "
+        "Vary intonation between sentences — pause clearly at each period. "
+        "Start with genuine curiosity, build suspense revealing the competitor gap. "
+        "Slight disbelief on the question, then shift to authoritative and reassuring. "
+        "Energetic but controlled pacing with natural breath pauses between thoughts."
+    ),
+    "slide2_audit": (
+        "Warm but direct and expressive delivery with clear pauses between sentences. "
+        "Acknowledge strengths with pride, then shift to concerned and urgent listing problems. "
+        "Emphasize each issue with gravity, like a doctor delivering a diagnosis carefully. "
+        "Measured pacing on the numbers, let each finding land with a pause after."
+    ),
+    "slide3_plan": (
+        "Optimistic and action-oriented with dynamic intonation and clear sentence breaks. "
+        "Build excitement and momentum through the roadmap. Confident and reassuring tone. "
+        "Slightly faster pace conveying energy. Emphasize phase transitions with pauses. "
+        "Coach-like motivational delivery with rising energy across the plan."
+    ),
+    "slide4_cta": (
+        "Warm, personal, and encouraging with natural conversational pauses. "
+        "Low-pressure friendly tone, like talking to a friend over coffee. "
+        "Genuine enthusiasm about the free deliverables. Clear sentence separation. "
+        "End with sincere confidence and a slight smile in the voice."
+    ),
+}
+
 
 def get_device_and_dtype():
     if torch.cuda.is_available():
@@ -340,9 +369,16 @@ def generate_adam_barrow(segments, sample_only=True):
     all_audio = []
 
     for name, text in to_generate:
+        emotion = ADAM_BARROW_EMOTIONS.get(name)
         print(f"\n[Adam Barrow] Generating: {name} ({len(text)} chars)")
+        if emotion:
+            print(f"[Adam Barrow] Emotion: {emotion[:60]}...")
         conversations = [
-            [processor.build_user_message(text=text, reference=[ref_audio])]
+            [
+                processor.build_user_message(
+                    text=text, reference=[ref_audio], instruction=emotion
+                )
+            ]
         ]
         batch = processor(conversations, mode="generation")
         input_ids = batch["input_ids"].to(device)
