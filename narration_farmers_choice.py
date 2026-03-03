@@ -14,6 +14,7 @@ Usage:
 """
 
 import argparse
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -158,6 +159,37 @@ def concatenate_segments(all_audio, sample_rate):
         if i < len(all_audio) - 1:
             combined.append(silence)
     return np.concatenate(combined)
+
+
+def enhance_audio(input_path, output_path=None):
+    """Post-process audio to sound more professional.
+
+    Applies: high-pass filter (remove rumble), presence EQ boost,
+    gentle compression, limiting, and loudness normalization.
+    """
+    if output_path is None:
+        output_path = input_path
+    tmp_path = str(input_path) + ".tmp.wav"
+    cmd = [
+        "ffmpeg", "-y", "-i", str(input_path), "-af",
+        ",".join([
+            "highpass=f=80",
+            "lowpass=f=12000",
+            "equalizer=f=180:t=q:w=1.5:g=1.5",
+            "equalizer=f=3000:t=q:w=2:g=3",
+            "equalizer=f=5000:t=q:w=2:g=2",
+            "acompressor=threshold=-20dB:ratio=3:attack=5:release=50:makeup=1.5",
+            "alimiter=limit=0.95:attack=1:release=10",
+            "dynaudnorm=p=0.95:m=10",
+        ]),
+        "-ar", "24000", "-ac", "1", "-acodec", "pcm_s16le", tmp_path,
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"[enhance] Warning: ffmpeg failed: {result.stderr[:200]}")
+        return
+    Path(tmp_path).replace(output_path)
+    print(f"[enhance] Enhanced: {output_path}")
 
 
 def generate_attenborough(segments, sample_only=True):
@@ -339,7 +371,10 @@ def generate_adam_barrow(segments, sample_only=True):
     device, dtype, attn_impl = get_device_and_dtype()
     model_path = "OpenMOSS-Team/MOSS-TTS"
     ref_audio = str(
-        Path(__file__).resolve().parent / "assets" / "audio" / "reference_adam_barrow.wav"
+        Path(__file__).resolve().parent
+        / "assets"
+        / "audio"
+        / "reference_adam_barrow_enhanced.wav"
     )
 
     print(f"[Adam Barrow] Loading model on {device}...")
@@ -402,6 +437,7 @@ def generate_adam_barrow(segments, sample_only=True):
 
         out_path = OUTPUT_DIR / f"adam_barrow_{name}.wav"
         sf.write(str(out_path), audio_np, sample_rate)
+        enhance_audio(out_path)
         print(f"[Adam Barrow] Saved: {out_path}")
         all_audio.append(audio_np)
 
@@ -409,6 +445,7 @@ def generate_adam_barrow(segments, sample_only=True):
         full_audio = concatenate_segments(all_audio, sample_rate)
         full_path = OUTPUT_DIR / "adam_barrow_full_narration.wav"
         sf.write(str(full_path), full_audio, sample_rate)
+        enhance_audio(full_path)
         print(
             f"\n[Adam Barrow] Full narration saved: {full_path} "
             f"({len(full_audio) / sample_rate:.1f}s)"
