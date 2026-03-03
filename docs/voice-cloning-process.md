@@ -133,6 +133,102 @@ If the output sounds off:
 | Too much variation / unstable | Lower `audio_temperature` toward 1.5 |
 | Words garbled or repeated | Lower `audio_top_p` to 0.6; check for unusual words in script |
 
+## Adam Barrow Voice — Quick Reference
+
+Ready-to-use voice clone of Adam Barrow (Dank You founder) for sales deck narration and client-facing audio.
+
+### Source
+- **Recording:** `dank_you_onboarding.mp4` (onboarding call, ~20 min)
+- **Reference clip:** `assets/audio/reference_adam_barrow.wav`
+  - 14.8s, mono, 24kHz, PCM 16-bit
+  - Timestamp: 379.0s–393.8s from the onboarding video
+  - Content: Adam explaining the audit/recommendation process — confident, professional, natural cadence
+  - Transcript: *"these are the type of email messages and like this will go again through an audit. It's allowed to you if you want us to audit and give a recommendation, we're happy to do it. If you're like, Adam, we're good, then you're good. And we'll, we'll just move forward as, as needed, but we're happy to do this free."*
+
+### Generate with CLI
+
+```bash
+# Sample (slide 1 hook only)
+python narration_farmers_choice.py --voice adam_barrow
+
+# All four slides
+python narration_farmers_choice.py --voice adam_barrow --full
+```
+
+### Use in Custom Scripts
+
+```python
+import mps_compat  # noqa — auto-patches MPS backend
+from transformers import AutoModel, AutoProcessor
+from optimized_generate import patch_generate
+
+model_path = "OpenMOSS-Team/MOSS-TTS"
+ref_audio = "assets/audio/reference_adam_barrow.wav"
+
+processor = AutoProcessor.from_pretrained(model_path, trust_remote_code=True)
+processor.audio_tokenizer = processor.audio_tokenizer.to(device)
+
+model = AutoModel.from_pretrained(
+    model_path, trust_remote_code=True, torch_dtype=torch.bfloat16,
+    attn_implementation="sdpa",
+).to(device)
+model.eval()
+patch_generate(model)
+
+conversations = [[
+    processor.build_user_message(
+        text="So here's what's interesting. You've got three hundred and six reviews...",
+        reference=[ref_audio],
+        instruction=(
+            "Natural, conversational tone like you're walking a client "
+            "through findings in a relaxed meeting."
+        ),
+    )
+]]
+
+batch = processor(conversations, mode="generation")
+outputs = model.generate(
+    input_ids=batch["input_ids"].to(device),
+    attention_mask=batch["attention_mask"].to(device),
+    max_new_tokens=6144,
+    audio_temperature=1.7,
+    audio_top_p=0.8,
+    audio_top_k=25,
+    audio_repetition_penalty=1.0,
+)
+messages = processor.decode(outputs)
+audio = messages[0].audio_codes_list[0].detach().float().cpu().numpy().reshape(-1)
+```
+
+### Adam's Speaking Style
+
+When writing text for Adam's voice, match his natural patterns from the reference clip:
+- **Contractions:** "you've got", "they're", "we're gonna", "you're good"
+- **Casual connectors:** "So here's the thing", "And actually", "Like,"
+- **Direct address:** "All you gotta do is...", "you keep doing what you're great at"
+- **Thinking out loud:** "and the reason is", "which is interesting"
+- **Short confirmations mid-thought:** "That's solid.", "The good news?"
+- Avoid formal/polished prose — write it like he'd say it in a meeting
+
+### Emotion Instructions That Work
+
+Keep instructions short and scenario-based:
+
+| Context | Instruction |
+|---------|-------------|
+| Sales pitch / hook | "Natural, conversational tone like you're walking a client through findings in a relaxed meeting. Casual but confident." |
+| Presenting data / audit | "Friendly and direct, like explaining results to a client you already know. Matter-of-fact but not alarming." |
+| Action plan / roadmap | "Upbeat and energetic like you're genuinely excited to share the game plan. Conversational momentum." |
+| Call to action / close | "Warm and easy-going, zero pressure. Like chatting with a friend about next steps." |
+| General / neutral | "Relaxed, professional American male voice. Natural pacing with casual confidence." |
+
+### Performance (M4 Pro, MPS)
+- Model load: ~16–20s
+- Generation: ~38–46s for ~23–28s of audio (RTF ~1.6x)
+- Output: 24kHz mono WAV
+
+---
+
 ## File Reference
 
 | File | Purpose |
