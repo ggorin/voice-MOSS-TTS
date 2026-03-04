@@ -209,3 +209,10 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 dev/*
+
+# MOSS-TTS project
+.DS_Store
+checkpoints/
+*.mp4
+sample_flight_announcement.wav
+test_output.wav
