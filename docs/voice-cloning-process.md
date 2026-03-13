@@ -730,6 +730,9 @@ python narration_farmers_choice.py --voice adam_barrow
 | `celebrities/profiles/*.md` | Voice profile guides (tics, patterns, pacing) |
 | `celebrities/scripts/*.yaml` | Monologue scripts per celebrity |
 | `celebrities/audio/*.wav` | Reference audio clips (24kHz mono) |
+| `celebrities/reference_manifest.yaml` | YouTube source URLs + timestamps for all 22 celebrities |
+| `tools/batch_extract_references.py` | Batch download + extract + transcribe all reference audio |
+| `tools/rate_reference.py` | Automated quality scoring (SNR, speech ratio, bandwidth, etc.) |
 | `assets/audio/reference_adam_barrow.wav` | 14.8s reference clip from onboarding call |
 | `docs/adam-barrow-voice-profile.md` | Adam's full speaking style & tics guide |
 | `docs/voice-cloning-process.md` | This document |
@@ -844,8 +847,9 @@ celebrities/
    python generate_celebrity.py new_celebrity --play
    ```
 
-### Reference Audio Extraction Tool
+### Reference Audio Tools
 
+#### Single extraction
 ```bash
 # From YouTube
 python tools/extract_reference.py --url "https://youtube.com/..." --start 120 --end 135 --celebrity morgan_freeman --candidate 1
@@ -859,6 +863,35 @@ python tools/extract_reference.py --celebrity morgan_freeman --list
 # Promote best candidate to final reference
 python tools/extract_reference.py --celebrity morgan_freeman --promote 1
 ```
+
+#### Batch extraction from manifest
+All YouTube sources are defined in `celebrities/reference_manifest.yaml`. Extract all at once:
+```bash
+# Download + extract + auto-transcribe all celebrities
+python tools/batch_extract_references.py
+
+# One celebrity only
+python tools/batch_extract_references.py --celebrity morgan_freeman
+
+# Show extraction status
+python tools/batch_extract_references.py --list
+```
+
+#### Quality rating
+Rate reference audio quality on a 0-100 scale (A/B/C/D/F grades):
+```bash
+# Rate a single file
+python tools/rate_reference.py celebrities/audio/reference_morgan_freeman.wav
+
+# Rate all candidates for a celebrity
+python tools/rate_reference.py --celebrity morgan_freeman
+
+# Rate all celebrities and auto-promote best candidates
+python tools/rate_reference.py --all --auto-promote
+```
+
+Scoring weights: SNR (30%), Speech ratio (25%), Consistency (15%), Clipping (15%), Bandwidth (15%).
+Best sources for high scores: audiobooks > podcasts > speeches > movie clips > interviews.
 
 ### Known Limitations
 
