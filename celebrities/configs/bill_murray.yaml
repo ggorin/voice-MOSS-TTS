@@ -1,0 +1,11 @@
+name: "Bill Murray"
+slug: "bill_murray"
+ref_audio: "celebrities/audio/reference_bill_murray.wav"
+ref_text: >
+  PLACEHOLDER — will be filled after reference audio is extracted.
+
+generation:
+  speed: 0.88
+  mode: "single_pass"
+  pause_normal_ms: 500
+  pause_short_ms: 400

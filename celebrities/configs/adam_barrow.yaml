@@ -1,0 +1,15 @@
+name: "Adam Barrow"
+slug: "adam_barrow"
+ref_audio: "assets/audio/reference_adam_barrow.wav"
+ref_text: >
+  these are the type of email messages and like this will go again through
+  an audit. It is allowed to you if you want us to audit and give a
+  recommendation, we are happy to do it. If you are like, Adam, we are good,
+  then you are good. And we will, we will just move forward as, as needed,
+  but we are happy to do this free.
+
+generation:
+  speed: 0.92
+  mode: "chunked"
+  pause_normal_ms: 450
+  pause_short_ms: 350

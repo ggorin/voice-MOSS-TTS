@@ -1,0 +1,12 @@
+name: "Gregory Gorin"
+slug: "gregory_gorin"
+ref_audio: "assets/audio/reference_gregory_gorin.wav"
+ref_text: >
+  I think it's just kind of workflow. How much do we want to live in this
+  app versus Pipedrive? Is this just a contact to find the contacts? And
+  then we put them over to Pipedrive. I know Apollo onto itself has some
+  great functionality.
+
+generation:
+  speed: 0.88
+  mode: "single_pass"
