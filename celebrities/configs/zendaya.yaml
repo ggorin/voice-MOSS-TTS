@@ -1,11 +1,10 @@
-name: "Zendaya"
-slug: "zendaya"
-ref_audio: "celebrities/audio/reference_zendaya.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Zendaya
+slug: zendaya
+ref_audio: celebrities/audio/reference_zendaya.wav
+ref_text: It's impossible to measure the influence that Cher has had and continues
+  to have on every one of us, as you can see. Her impact spans generations and
 generation:
   speed: 0.92
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

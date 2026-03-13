@@ -1,11 +1,12 @@
-name: "Jack Lemmon"
-slug: "jack_lemmon"
-ref_audio: "celebrities/audio/reference_jack_lemmon.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Jack Lemmon
+slug: jack_lemmon
+ref_audio: celebrities/audio/reference_jack_lemmon.wav
+ref_text: Bruce, Harriet, what we have to do is admit to ourselves that we see that
+  opportunity and take it, right? And that's it. Now, we just sit there. I got my
+  pen out. Always be closing. Oh, God, that's what I've been saying in the old ways.
+  Right, cun...
 generation:
-  speed: 0.90
-  mode: "single_pass"
+  speed: 0.9
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

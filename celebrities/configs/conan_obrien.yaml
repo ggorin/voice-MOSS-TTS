@@ -1,11 +1,9 @@
-name: "Conan O'Brien"
-slug: "conan_obrien"
-ref_audio: "celebrities/audio/reference_conan_obrien.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Conan O'Brien
+slug: conan_obrien
+ref_audio: celebrities/audio/reference_conan_obrien.wav
+ref_text: Hilarious comedy writer. Brian, Kylie, occasionally, no, always hilarious. You know, you're no Kilmartin, but you're good. I don't know what to say, but we get into this very small room and this went on for years and years and years. And it's your dressing room. My dressing room.
 generation:
   speed: 0.94
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

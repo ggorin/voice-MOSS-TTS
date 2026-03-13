@@ -1,11 +1,9 @@
-name: "Bill Murray"
-slug: "bill_murray"
-ref_audio: "celebrities/audio/reference_bill_murray.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Bill Murray
+slug: bill_murray
+ref_audio: celebrities/audio/reference_bill_murray.wav
+ref_text: that it was impossible. I stopped counting. On game day? This was on game day. Night before. I don't think alcohol affected the 85 Bears. It didn't affect them. But I finally had to say, I think I better go, fellas. I just didn't.
 generation:
   speed: 0.88
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

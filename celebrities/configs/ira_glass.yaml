@@ -1,11 +1,13 @@
-name: "Ira Glass"
-slug: "ira_glass"
-ref_audio: "celebrities/audio/reference_ira_glass.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Ira Glass
+slug: ira_glass
+ref_audio: celebrities/audio/reference_ira_glass.wav
+ref_text: stories for television or radio is that you understand the building blocks
+  of the stories and and there are different ways to think about this one of the things
+  you don't want to do is you don't want to think about it the way that you learned
+  in in high school which is in high school we're all taught that the way that you
+  write is that there's like a topics
 generation:
   speed: 0.88
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

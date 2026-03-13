@@ -1,11 +1,11 @@
-name: "David Attenborough"
-slug: "david_attenborough"
-ref_audio: "celebrities/audio/reference_david_attenborough.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: David Attenborough
+slug: david_attenborough
+ref_audio: celebrities/audio/reference_david_attenborough.wav
+ref_text: widely around the globe. I've experienced the living world first-hand in
+  all its variety and wonder and witnessed some of its greatest spectacles and most
+  gripping dramas. As a boy, I
 generation:
   speed: 0.85
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

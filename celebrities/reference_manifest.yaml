@@ -1,0 +1,201 @@
+# Reference Audio Manifest
+# Maps each celebrity to their best YouTube/archive.org source for voice cloning.
+#
+# Priority order for source types:
+#   1. Audiobook readings / narration (cleanest, solo voice, studio quality)
+#   2. Commencement speeches / solo addresses (clean, solo, but room reverb)
+#   3. Movie monologues (clean mix, but may have score underneath)
+#   4. Podcast/show hosting (own show = good mic, solo segments)
+#   5. Talk show interviews (last resort — crosstalk, audience noise)
+#
+# Requirements for a good clip:
+#   - 12-15 seconds of continuous solo speech
+#   - No background music, audience noise, or other speakers
+#   - Clear articulation, natural pace (not whispering or shouting)
+#   - Representative of their iconic vocal quality
+#
+# Usage:
+#   python tools/batch_extract_references.py                    # extract all
+#   python tools/batch_extract_references.py --celebrity morgan_freeman  # one only
+
+celebrities:
+  # Batch 1: Most distinctive voices
+  morgan_freeman:
+    sources:
+      - url: "https://www.youtube.com/watch?v=3Uc9wS3DOPo"
+        title: "Invictus by William Henley read by Morgan Freeman"
+        start: 89.0
+        end: 103.0
+        notes: "Solo poetry reading, no music, 4th stanza climax, deep resonant baritone"
+
+  james_earl_jones:
+    sources:
+      - url: "https://youtube.com/watch?v=HzM35gtwCmM"
+        title: "That Man Monologue"
+        start: 5.0
+        end: 20.0
+        notes: "Selected as final reference — solo monologue, clean audio"
+
+  christopher_walken:
+    sources:
+      - url: "https://www.youtube.com/watch?v=H4IrfObVzJo"
+        title: "The Three Little Pigs read by Christopher Walken"
+        start: 9.0
+        end: 23.0
+        notes: "Solo reading, no audience/music, eccentric pauses and staccato delivery"
+
+  werner_herzog:
+    sources:
+      - url: "https://www.youtube.com/watch?v=QhMo4WlBmGM"
+        title: "Werner Herzog on Chickens"
+        start: 11.5
+        end: 25.5
+        notes: "Solo monologue, consistent RMS, German-accented philosophical rant, very clean"
+
+  gilbert_gottfried:
+    sources:
+      - url: "https://www.youtube.com/watch?v=XkLqAlIETkA"
+        title: "Gilbert Gottfried Reads 50 Shades of Grey"
+        start: 42.0
+        end: 56.0
+        notes: "Solo reading, no audience, continuous speech, signature screech captured"
+
+  # Batch 2: Comedians
+  bill_murray:
+    sources:
+      - url: "https://youtube.com/watch?v=03vT72PsSeE"
+        title: "Bill Murray's Apology - SNL"
+        start: 207.0
+        end: 222.0
+        notes: "Solo monologue direct to camera, studio quality, signature deadpan"
+
+  steve_martin:
+    sources:
+      - url: "https://youtube.com/watch?v=5eYx1-qDtbo"
+        title: "Born Standing Up: A Comic's Life Audiobook Preview"
+        start: 120.0
+        end: 135.0
+        notes: "Studio audiobook narration, 62.0dB SNR, 91% speech, score 83 [B]"
+
+  martin_short:
+    sources:
+      - url: "https://youtube.com/watch?v=k5XqYOl83Mk"
+        title: "Martin Short Monologue - SNL"
+        start: 36.0
+        end: 51.0
+        notes: "SNL hosting monologue, broadcast quality, manic energy, very high SNR"
+
+  john_candy:
+    sources:
+      - url: "https://youtube.com/watch?v=JJMDLWmEDM0"
+        title: "Planes Trains & Automobiles - I don't have a home"
+        start: 0.5
+        end: 14.0
+        notes: "Iconic emotional monologue, clean film audio, warm everyman quality, 13.5s"
+
+  conan_obrien:
+    sources:
+      - url: "https://youtube.com/watch?v=_coFFIDVJ_Y"
+        title: "Conan O'Brien Oscars 2025 Opening Monologue"
+        start: 76.0
+        end: 91.0
+        notes: "Broadcast quality, solo at podium, rapid-fire self-deprecating comedy"
+
+  # Batch 3: Broadcast/public figures
+  david_attenborough:
+    sources:
+      - url: "https://youtube.com/watch?v=rX40mBb8bkU"
+        title: "Our Planet | Birds Of Paradise | Netflix"
+        start: 8.0
+        end: 23.0
+        notes: "Netflix studio voiceover narration, pristine audio, classic BBC delivery"
+
+  oprah_winfrey:
+    sources:
+      - url: "https://youtube.com/watch?v=Bpd3raj8xww"
+        title: "Oprah 2008 Stanford Commencement Address"
+        start: 120.0
+        end: 135.0
+        notes: "Podium mic, solo speaker, after applause dies down, signature contralto"
+
+  barack_obama:
+    sources:
+      - url: "https://youtube.com/watch?v=ZuVQEANjcIg"
+        title: "Dreams from My Father Audiobook Part 1"
+        start: 180.0
+        end: 195.0
+        notes: "Studio audiobook narration, 36.9dB SNR, 96% speech, 5.1kHz BW, score 86 [A]"
+
+  ira_glass:
+    sources:
+      - url: "https://youtube.com/watch?v=5pFI9UuC_fc"
+        title: "Ira Glass on Storytelling 1"
+        start: 10.0
+        end: 25.0
+        notes: "Direct to camera, close-mic'd, indoor studio, signature nasal storyteller"
+
+  joe_rogan:
+    sources:
+      - url: "https://youtube.com/watch?v=uB8BcRimf78"
+        title: "Joe Rogan Experience #2375 - Tim Dillon"
+        start: 480.0
+        end: 495.0
+        notes: "JRE podcast, close-mic'd studio, 40.0dB SNR, 100% speech, score 81 [B]"
+
+  # Batch 4: Actors
+  cate_blanchett:
+    sources:
+      - url: "https://youtube.com/watch?v=kJv_jpFEkGU"
+        title: "Cate Blanchett Acceptance Speech Britannia Awards 2018"
+        start: 60.0
+        end: 75.0
+        notes: "Podium speech, 24.6dB SNR, 99% speech, 5.4kHz BW, score 74 [B]"
+
+  anthony_bourdain:
+    sources:
+      - url: "https://www.youtube.com/watch?v=SVjOB3ZN1Ek"
+        title: "Anthony Bourdain No Reservations - Final Scene and Quote"
+        start: 20.0
+        end: 35.0
+        notes: "Solo voiceover, gravelly sardonic tone, clean TV mix, no background music"
+
+  zendaya:
+    sources:
+      - url: "https://www.youtube.com/watch?v=uk5WGZD7R5U"
+        title: "Zendaya Inducts Cher Into Rock Hall 2024"
+        start: 39.5
+        end: 53.0
+        notes: "Solo podium speech, clean venue audio, light youthful alto, no crosstalk"
+
+  jack_nicholson:
+    sources:
+      - url: "https://www.youtube.com/watch?v=q7L1rIQuXew"
+        title: "A Few Good Men - Jack Nicholson Monologue"
+        start: 0.5
+        end: 15.0
+        notes: "Iconic courtroom monologue, clean film audio, menacing growl signature"
+
+  sam_elliott:
+    sources:
+      - url: "https://www.youtube.com/watch?v=j1epEtB0lVo"
+        title: "The Big Lebowski Opening Scene"
+        start: 18.5
+        end: 33.0
+        notes: "The Stranger narration, song ends before 18s, deep Western drawl, solo"
+
+  # Batch 5: Classic + modern
+  jack_lemmon:
+    sources:
+      - url: "https://youtube.com/watch?v=Wn1cM4fyO1Q"
+        title: "Glengarry Glen Ross - Levene's Great Sale Story"
+        start: 100.0
+        end: 114.0
+        notes: "Solo monologue, 1992 film audio, exasperated nervous energy, no interjections"
+
+  matthew_mcconaughey:
+    sources:
+      - url: "https://youtube.com/watch?v=CAEKsc1-Y8o"
+        title: "Greenlights Audiobook Preview"
+        start: 275.9
+        end: 290.5
+        notes: "Studio audiobook narration, cleanest possible source, Texas drawl, no music"

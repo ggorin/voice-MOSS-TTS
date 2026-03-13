@@ -1,11 +1,12 @@
-name: "Matthew McConaughey"
-slug: "matthew_mcconaughey"
-ref_audio: "celebrities/audio/reference_matthew_mcconaughey.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Matthew McConaughey
+slug: matthew_mcconaughey
+ref_audio: celebrities/audio/reference_matthew_mcconaughey.wav
+ref_text: These are my sights and scenes, felt and figured out, cools and shameful,
+  graces, truths, and beauties of brutality, initiations, invitations, calibrations,
+  and graduations, getting away with, getting caught, and getting wet trying to dance
+  between the raindrops.
 generation:
   speed: 0.86
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

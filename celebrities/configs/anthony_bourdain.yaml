@@ -1,11 +1,11 @@
-name: "Anthony Bourdain"
-slug: "anthony_bourdain"
-ref_audio: "celebrities/audio/reference_anthony_bourdain.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Anthony Bourdain
+slug: anthony_bourdain
+ref_audio: celebrities/audio/reference_anthony_bourdain.wav
+ref_text: If I do have any advice for anybody, any final thought, if I'm an advocate
+  for anything, it's to move. As far as you can, as much as you can. Across the ocean
+  or simply across the river. The extent to which you can walk in somebody else's...
 generation:
-  speed: 0.90
-  mode: "single_pass"
+  speed: 0.9
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

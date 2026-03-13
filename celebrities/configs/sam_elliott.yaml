@@ -1,11 +1,10 @@
-name: "Sam Elliott"
-slug: "sam_elliott"
-ref_audio: "celebrities/audio/reference_sam_elliott.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Sam Elliott
+slug: sam_elliott
+ref_audio: celebrities/audio/reference_sam_elliott.wav
+ref_text: Irish beef stew, beef brisket, chateaubriand, sauerbraten, roast beef,
+  Catalonian beef ragu, Mongolian beef, chicken fried steak, steak Diane, grilled
 generation:
   speed: 0.84
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

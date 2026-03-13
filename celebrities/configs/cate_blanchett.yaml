@@ -1,11 +1,11 @@
-name: "Cate Blanchett"
-slug: "cate_blanchett"
-ref_audio: "celebrities/audio/reference_cate_blanchett.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Cate Blanchett
+slug: cate_blanchett
+ref_audio: celebrities/audio/reference_cate_blanchett.wav
+ref_text: having too many opinions. Cunning was definitely something you had to have in
+  your toolbox, but hopefully that's changing. And I'd also like to thank the astonishing
+  array of recipients who've come before me and who've certainly influenced my
 generation:
   speed: 0.88
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

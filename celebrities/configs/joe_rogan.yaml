@@ -1,11 +1,11 @@
-name: "Joe Rogan"
-slug: "joe_rogan"
-ref_audio: "celebrities/audio/reference_joe_rogan.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Joe Rogan
+slug: joe_rogan
+ref_audio: celebrities/audio/reference_joe_rogan.wav
+ref_text: in the clear. But imagine that's one of the posts that they cited as being the
+  reason for arresting him. Interesting. And then the other one is saying that if a
+  man who identifies as a woman enters a woman's back.
 generation:
   speed: 0.95
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

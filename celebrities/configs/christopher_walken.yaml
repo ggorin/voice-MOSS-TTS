@@ -1,11 +1,11 @@
-name: "Christopher Walken"
-slug: "christopher_walken"
-ref_audio: "celebrities/audio/reference_christopher_walken.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Christopher Walken
+slug: christopher_walken
+ref_audio: celebrities/audio/reference_christopher_walken.wav
+ref_text: decided to build himself a house. Now the first little piggy was a very
+  lazy little piggy and he built his house from straw. The second little piggy was
+  not too bright either and he built his house
 generation:
   speed: 0.85
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

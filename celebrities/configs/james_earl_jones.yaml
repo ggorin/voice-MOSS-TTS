@@ -2,7 +2,9 @@ name: "James Earl Jones"
 slug: "james_earl_jones"
 ref_audio: "celebrities/audio/reference_james_earl_jones.wav"
 ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
+  He was coming down the street at me. I had visions in my head of being
+  laid out cold and dead, or else murdered by the third degree. I said,
+  Lord, if you can...
 
 generation:
   speed: 0.80

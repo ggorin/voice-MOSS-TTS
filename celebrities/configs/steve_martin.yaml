@@ -1,11 +1,12 @@
-name: "Steve Martin"
-slug: "steve_martin"
-ref_audio: "celebrities/audio/reference_steve_martin.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Steve Martin
+slug: steve_martin
+ref_audio: celebrities/audio/reference_steve_martin.wav
+ref_text: ideal circumstances. Comedy's enemy is distraction, and rarely do comedians
+  get a pristine performing environment. I worried about the sound system, ambient
+  noise, hecklers, drunks, lighting, sudden clangs, latecomers, and loud talkers,
+  and not to mention
 generation:
-  speed: 0.90
-  mode: "single_pass"
+  speed: 0.9
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

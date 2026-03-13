@@ -1,11 +1,9 @@
-name: "John Candy"
-slug: "john_candy"
-ref_audio: "celebrities/audio/reference_john_candy.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: John Candy
+slug: john_candy
+ref_audio: celebrities/audio/reference_john_candy.wav
+ref_text: starts to wane a little bit, you know, in case we start getting long-winded, you know, feel free to use that, please. Oh, really? Okay, all right. Now, I want to use this capriciously. It's kind of an incentive for us, too, to keep the segment going. I'll be right here on the top of my head. All right.
 generation:
   speed: 0.88
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

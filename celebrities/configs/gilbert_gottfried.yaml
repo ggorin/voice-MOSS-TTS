@@ -1,11 +1,11 @@
-name: "Gilbert Gottfried"
-slug: "gilbert_gottfried"
-ref_audio: "celebrities/audio/reference_gilbert_gottfried.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Gilbert Gottfried
+slug: gilbert_gottfried
+ref_audio: celebrities/audio/reference_gilbert_gottfried.wav
+ref_text: Anything else you object to? I agree to the fisting, but I'd really like
+  to claim your ass. Famed voice actor Gilbert Gottfried gives a reading that can
+  only be described as...
 generation:
   speed: 0.95
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

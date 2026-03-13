@@ -1,11 +1,12 @@
-name: "Martin Short"
-slug: "martin_short"
-ref_audio: "celebrities/audio/reference_martin_short.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Martin Short
+slug: martin_short
+ref_audio: celebrities/audio/reference_martin_short.wav
+ref_text: big SNL Christmas show and I just I can't believe the holidays are already
+  here but we must move this monologue along because I have ten sketches to get to
+  where I play an elf. Also I left my Uber driver waiting and you know how testy Matt
+  Gates
 generation:
   speed: 0.93
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

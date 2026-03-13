@@ -1,11 +1,11 @@
-name: "Jack Nicholson"
-slug: "jack_nicholson"
-ref_audio: "celebrities/audio/reference_jack_nicholson.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Jack Nicholson
+slug: jack_nicholson
+ref_audio: celebrities/audio/reference_jack_nicholson.wav
+ref_text: Those walls have to be guarded by men with guns. Who's gonna do it? You?
+  You, Lieutenant Weinberg? I have a greater responsibility than you can possibly
+  fathom. You weep for Santiago and you curse the Marines. You have that...
 generation:
   speed: 0.88
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

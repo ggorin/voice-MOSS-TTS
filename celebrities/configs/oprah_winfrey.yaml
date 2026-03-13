@@ -1,11 +1,11 @@
-name: "Oprah Winfrey"
-slug: "oprah_winfrey"
-ref_audio: "celebrities/audio/reference_oprah_winfrey.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Oprah Winfrey
+slug: oprah_winfrey
+ref_audio: celebrities/audio/reference_oprah_winfrey.wav
+ref_text: that's Gayle King, because a lot of people know Gayle King is my BFF. And
+  so somebody comes up to Kirby and they say, oh my god, is that Gayle King? And Kirby's
+  like, uh-huh, she's my mom.
 generation:
-  speed: 0.90
-  mode: "single_pass"
+  speed: 0.9
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

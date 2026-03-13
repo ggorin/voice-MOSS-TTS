@@ -1,11 +1,11 @@
-name: "Morgan Freeman"
-slug: "morgan_freeman"
-ref_audio: "celebrities/audio/reference_morgan_freeman.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Morgan Freeman
+slug: morgan_freeman
+ref_audio: celebrities/audio/reference_morgan_freeman.wav
+ref_text: bringing the story of God to worldwide audience of all beliefs. He also
+  continues to change lives through his foundation, which has donated millions to
+  education.
 generation:
   speed: 0.82
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

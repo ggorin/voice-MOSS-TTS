@@ -1,11 +1,11 @@
-name: "Werner Herzog"
-slug: "werner_herzog"
-ref_audio: "celebrities/audio/reference_werner_herzog.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Werner Herzog
+slug: werner_herzog
+ref_audio: celebrities/audio/reference_werner_herzog.wav
+ref_text: When you're out in the countryside and you see chicken, try to look a chicken
+  in the eye with great intensity. And the intensity of stupidity that is looking
+  back at you is just amazing.
 generation:
   speed: 0.83
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400

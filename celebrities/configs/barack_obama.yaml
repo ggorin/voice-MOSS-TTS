@@ -1,11 +1,12 @@
-name: "Barack Obama"
-slug: "barack_obama"
-ref_audio: "celebrities/audio/reference_barack_obama.wav"
-ref_text: >
-  PLACEHOLDER — will be filled after reference audio is extracted.
-
+name: Barack Obama
+slug: barack_obama
+ref_audio: celebrities/audio/reference_barack_obama.wav
+ref_text: without organizational backing or personal wealth, a black man with a funny
+  name, I was considered a long shot. And so, when I won a majority of the votes in
+  the Democratic primary, winning in white areas as well as black, in the suburbs as
+  well as Chicago,
 generation:
   speed: 0.85
-  mode: "single_pass"
+  mode: single_pass
   pause_normal_ms: 500
   pause_short_ms: 400
