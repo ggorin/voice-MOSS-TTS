@@ -1,9 +1,8 @@
 name: Morgan Freeman
 slug: morgan_freeman
 ref_audio: celebrities/audio/reference_morgan_freeman.wav
-ref_text: The man in the red checkered shirt, holding his selfie stick, trying to
-  get that perfect selfie. Perfect selfie Paul, that's what we called him. How he
-  loved that selfie stick.
+ref_text: I had a voice and diction instructor who was very good at his job. And
+  so you had to learn to speak and sound your final consonants.
 generation:
   speed: 0.82
   mode: single_pass

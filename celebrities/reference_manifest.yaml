@@ -22,11 +22,11 @@ celebrities:
   # Batch 1: Most distinctive voices
   morgan_freeman:
     sources:
-      - url: "https://www.youtube.com/watch?v=3MAJvgm2eMg"
-        title: "Morgan Freeman Narrates Pedestrians On Hollywood Boulevard"
-        start: 25.0
-        end: 40.0
-        notes: "Solo narration, studio quality, 32dB SNR, 70% speech, iconic storytelling voice, score 68 [C]"
+      - url: "https://www.youtube.com/watch?v=avABSo6xpqg"
+        title: "How Morgan Freeman Learned to Talk Like That (Conan interview)"
+        start: 56.5
+        end: 70.0
+        notes: "Solo speech about voice training, 34dB SNR, 77% speech, clean studio audio, score 71 [B]"
 
   james_earl_jones:
     sources:
