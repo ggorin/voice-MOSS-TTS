@@ -1,9 +1,9 @@
 name: Morgan Freeman
 slug: morgan_freeman
 ref_audio: celebrities/audio/reference_morgan_freeman.wav
-ref_text: bringing the story of God to worldwide audience of all beliefs. He also
-  continues to change lives through his foundation, which has donated millions to
-  education.
+ref_text: The man in the red checkered shirt, holding his selfie stick, trying to
+  get that perfect selfie. Perfect selfie Paul, that's what we called him. How he
+  loved that selfie stick.
 generation:
   speed: 0.82
   mode: single_pass

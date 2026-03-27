@@ -22,11 +22,11 @@ celebrities:
   # Batch 1: Most distinctive voices
   morgan_freeman:
     sources:
-      - url: "https://www.youtube.com/watch?v=3Uc9wS3DOPo"
-        title: "Invictus by William Henley read by Morgan Freeman"
-        start: 89.0
-        end: 103.0
-        notes: "Solo poetry reading, no music, 4th stanza climax, deep resonant baritone"
+      - url: "https://www.youtube.com/watch?v=3MAJvgm2eMg"
+        title: "Morgan Freeman Narrates Pedestrians On Hollywood Boulevard"
+        start: 25.0
+        end: 40.0
+        notes: "Solo narration, studio quality, 32dB SNR, 70% speech, iconic storytelling voice, score 68 [C]"
 
   james_earl_jones:
     sources:
