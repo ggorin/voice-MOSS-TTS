@@ -5,12 +5,12 @@ Reads celebrities/reference_manifest.yaml, downloads + extracts + converts
 each clip, then auto-transcribes with mlx_whisper and updates the YAML configs.
 
 Usage:
-  cd /Users/gregorygorin/Projects/voice/mlx-tts
+  cd /Users/gregorygorin/Projects/voice/voiceclone
   source .venv/bin/activate
-  python ../MOSS-TTS/tools/batch_extract_references.py                          # all
-  python ../MOSS-TTS/tools/batch_extract_references.py --celebrity morgan_freeman  # one
-  python ../MOSS-TTS/tools/batch_extract_references.py --skip-transcribe        # no whisper
-  python ../MOSS-TTS/tools/batch_extract_references.py --list                   # show status
+  python tools/batch_extract_references.py                          # all
+  python tools/batch_extract_references.py --celebrity morgan_freeman  # one
+  python tools/batch_extract_references.py --skip-transcribe        # no whisper
+  python tools/batch_extract_references.py --list                   # show status
 """
 
 import argparse

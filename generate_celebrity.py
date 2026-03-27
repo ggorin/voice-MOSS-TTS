@@ -5,13 +5,13 @@ Supports both chunked and single-pass generation modes, configured per
 celebrity via YAML configs. Replaces per-voice scripts.
 
 Usage:
-  cd /Users/gregorygorin/Projects/voice/mlx-tts
+  cd /Users/gregorygorin/Projects/voice/voiceclone
   source .venv/bin/activate
-  python ../MOSS-TTS/generate_celebrity.py morgan_freeman              # generate monologue
-  python ../MOSS-TTS/generate_celebrity.py morgan_freeman --play        # generate + play
-  python ../MOSS-TTS/generate_celebrity.py --all                       # generate all 22
-  python ../MOSS-TTS/generate_celebrity.py --list                      # list available voices
-  python ../MOSS-TTS/generate_celebrity.py morgan_freeman --text "..." # custom text
+  python generate_celebrity.py morgan_freeman              # generate monologue
+  python generate_celebrity.py morgan_freeman --play        # generate + play
+  python generate_celebrity.py --all                       # generate all 22
+  python generate_celebrity.py --list                      # list available voices
+  python generate_celebrity.py morgan_freeman --text "..." # custom text
 """
 
 import argparse
@@ -126,12 +126,13 @@ def generate_chunked(model, config, chunks, output_path):
         pause_type = chunk.get("pause", "none")
         print(f"  [{i+1}/{len(chunks)}] {text[:65]}{'...' if len(text) > 65 else ''}")
 
+        chunk_speed = chunk.get("speed", speed)
         t1 = time.time()
         results = list(model.generate(
             text=text,
             ref_audio=ref_audio,
             ref_text=ref_text,
-            speed=speed,
+            speed=chunk_speed,
         ))
         chunk_audio = np.array(results[0].audio)
         audio_parts.append(chunk_audio)
@@ -154,7 +155,7 @@ def generate_chunked(model, config, chunks, output_path):
     return final
 
 
-def generate_celebrity(model, slug, custom_text=None):
+def generate_celebrity(model, slug, custom_text=None, slide_key="monologue"):
     """Generate monologue for a single celebrity."""
     config = load_config(slug)
     name = config["name"]
@@ -173,7 +174,7 @@ def generate_celebrity(model, slug, custom_text=None):
     print(f"  Speed: {speed} | Mode: {mode}")
     print(f"{'='*60}")
 
-    output_path = OUTPUT_DIR / f"{slug}_monologue.wav"
+    output_path = OUTPUT_DIR / f"{slug}_{slide_key}.wav"
 
     if custom_text:
         # Custom text always uses single-pass
@@ -181,7 +182,7 @@ def generate_celebrity(model, slug, custom_text=None):
 
     # Load monologue script
     script = load_script(slug)
-    monologue = script["slides"]["monologue"]
+    monologue = script["slides"][slide_key]
     script_mode = monologue.get("mode", mode)
 
     if script_mode == "single_pass":
@@ -220,6 +221,10 @@ def main():
         "--text", type=str,
         help="Custom text to generate (single-pass mode)",
     )
+    parser.add_argument(
+        "--slide", type=str, default="monologue",
+        help="Which slide to generate from the script (default: monologue)",
+    )
     args = parser.parse_args()
 
     if args.list:
@@ -257,7 +262,7 @@ def main():
             print(f"    {slug}: {path}")
         print(f"{'='*60}")
     else:
-        audio, path = generate_celebrity(model, args.celebrity, custom_text=args.text)
+        audio, path = generate_celebrity(model, args.celebrity, custom_text=args.text, slide_key=args.slide)
 
         if args.play and path:
             print(f"\nPlaying: {path}")

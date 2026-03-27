@@ -26,15 +26,15 @@ Complete guide for cloning voices and generating natural-sounding narration usin
 ## Quick Start
 
 ```bash
-# From the mlx-tts project directory
-cd /Users/gregorygorin/Projects/voice/mlx-tts
+# From the voiceclone project directory
+cd /Users/gregorygorin/Projects/voice/voiceclone
 source .venv/bin/activate
 
 # Generate all 4 slides
-python ../MOSS-TTS/generate_adam_qwen3.py
+python generate_adam_qwen3.py
 
 # Generate slide 1 only and play it
-python ../MOSS-TTS/generate_adam_qwen3.py --slide 1 --play
+python generate_adam_qwen3.py --slide 1 --play
 ```
 
 ---
@@ -553,9 +553,9 @@ SLIDE1_HOOK = [
 ### Step 6: Generate
 
 ```bash
-cd /Users/gregorygorin/Projects/voice/mlx-tts
+cd /Users/gregorygorin/Projects/voice/voiceclone
 source .venv/bin/activate
-python ../MOSS-TTS/generate_adam_qwen3.py --slide 1 --play
+python generate_adam_qwen3.py --slide 1 --play
 ```
 
 ### Result
@@ -577,17 +577,17 @@ The full generation script lives at `generate_adam_qwen3.py` in the project root
 ### Usage
 
 ```bash
-cd /Users/gregorygorin/Projects/voice/mlx-tts
+cd /Users/gregorygorin/Projects/voice/voiceclone
 source .venv/bin/activate
 
 # All 4 slides + concatenated full narration
-python ../MOSS-TTS/generate_adam_qwen3.py
+python generate_adam_qwen3.py
 
 # Single slide
-python ../MOSS-TTS/generate_adam_qwen3.py --slide 1
+python generate_adam_qwen3.py --slide 1
 
 # Generate and immediately play
-python ../MOSS-TTS/generate_adam_qwen3.py --slide 1 --play
+python generate_adam_qwen3.py --slide 1 --play
 ```
 
 ### Output files
@@ -686,7 +686,7 @@ We tested multiple TTS models for Adam's voice clone. Key findings:
 
 ### Qwen3-TTS (recommended)
 ```bash
-cd /Users/gregorygorin/Projects/voice/mlx-tts
+cd /Users/gregorygorin/Projects/voice/voiceclone
 source .venv/bin/activate
 # Model: mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16
 # Auto-downloads ~3.4GB on first run
@@ -694,7 +694,7 @@ source .venv/bin/activate
 
 ### MOSS-TTS (legacy)
 ```bash
-cd /Users/gregorygorin/Projects/voice/MOSS-TTS
+cd /Users/gregorygorin/Projects/voice/voiceclone
 source .venv/bin/activate
 python narration_farmers_choice.py --voice adam_barrow
 ```
@@ -749,20 +749,20 @@ A unified framework for cloning 22 iconic celebrity voices as an educational pro
 ### Quick Start
 
 ```bash
-cd /Users/gregorygorin/Projects/voice/mlx-tts
+cd /Users/gregorygorin/Projects/voice/voiceclone
 source .venv/bin/activate
 
 # List all available voices
-python ../MOSS-TTS/generate_celebrity.py --list
+python generate_celebrity.py --list
 
 # Generate a specific celebrity's monologue
-python ../MOSS-TTS/generate_celebrity.py morgan_freeman --play
+python generate_celebrity.py morgan_freeman --play
 
 # Generate all 22 celebrities
-python ../MOSS-TTS/generate_celebrity.py --all
+python generate_celebrity.py --all
 
 # Custom text with any voice
-python ../MOSS-TTS/generate_celebrity.py morgan_freeman --text "Your custom text here."
+python generate_celebrity.py morgan_freeman --text "Your custom text here."
 ```
 
 ### The 22 Voices

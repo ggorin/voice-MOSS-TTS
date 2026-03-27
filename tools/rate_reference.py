@@ -10,20 +10,20 @@ Scores each candidate on metrics that matter for Qwen3-TTS ICL cloning:
   - Overall score (weighted composite, 0-100)
 
 Usage:
-  cd /Users/gregorygorin/Projects/voice/mlx-tts
+  cd /Users/gregorygorin/Projects/voice/voiceclone
   source .venv/bin/activate
 
   # Rate a single file
-  python ../MOSS-TTS/tools/rate_reference.py celebrities/audio/reference_james_earl_jones_candidate8.wav
+  python tools/rate_reference.py celebrities/audio/reference_james_earl_jones_candidate8.wav
 
   # Rate all candidates for a celebrity
-  python ../MOSS-TTS/tools/rate_reference.py --celebrity james_earl_jones
+  python tools/rate_reference.py --celebrity james_earl_jones
 
   # Rate all candidates for all celebrities
-  python ../MOSS-TTS/tools/rate_reference.py --all
+  python tools/rate_reference.py --all
 
   # Auto-promote best candidate per celebrity
-  python ../MOSS-TTS/tools/rate_reference.py --all --auto-promote
+  python tools/rate_reference.py --all --auto-promote
 """
 
 import argparse

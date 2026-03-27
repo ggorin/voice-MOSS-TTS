@@ -5,11 +5,11 @@ Single-pass generation per slide for consistent voice, with Gregory-style
 tics and technical delivery patterns.
 
 Usage:
-  cd /Users/gregorygorin/Projects/voice/mlx-tts
+  cd /Users/gregorygorin/Projects/voice/voiceclone
   source .venv/bin/activate
-  python ../MOSS-TTS/generate_greg_qwen3.py                    # all slides
-  python ../MOSS-TTS/generate_greg_qwen3.py --slide 1          # slide 1 only
-  python ../MOSS-TTS/generate_greg_qwen3.py --slide 1 --play   # generate + play
+  python generate_greg_qwen3.py                    # all slides
+  python generate_greg_qwen3.py --slide 1          # slide 1 only
+  python generate_greg_qwen3.py --slide 1 --play   # generate + play
 """
 
 import argparse

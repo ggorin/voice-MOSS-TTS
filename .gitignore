@@ -210,9 +210,16 @@ marimo/_lsp/
 __marimo__/
 dev/*
 
-# MOSS-TTS project
+# Voiceclone project
 .DS_Store
 checkpoints/
 *.mp4
+
+# Generated audio outputs (keep on disk, not in git)
+narration_output/*.wav
 sample_flight_announcement.wav
 test_output.wav
+
+# Reference audio (large binary files, keep on disk)
+celebrities/audio/*.wav
+assets/audio/*.wav
